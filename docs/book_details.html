@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Book Assignments — Demo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Book Assignments</h2>
+    <a class="button btn-back" href="index.html">Back</a>
+    <div id="details-root"></div>
+  </div>
+
+  <script>
+    async function load() {
+      const res = await fetch('data.json');
+      const data = await res.json();
+
+      const booksById = {};
+      data.books.forEach(b => booksById[b.book_id] = b.title);
+      const authorsById = {};
+      data.authors.forEach(a => authorsById[a.author_id] = a.name);
+
+      const rows = data.book_details
+        .filter(d => d.is_deleted === 0 || d.is_deleted === '0' || d.is_deleted === undefined)
+        .map(d => {
+          const book = booksById[d.book_id] || ('#' + d.book_id);
+          const author = authorsById[d.author_id] || ('#' + d.author_id);
+          return `<tr><td>${d.id}</td><td>${book}</td><td>${author}</td></tr>`;
+        });
+
+      const table = `
+        <table>
+          <thead><tr><th>ID</th><th>Book</th><th>Author</th></tr></thead>
+          <tbody>${rows.join('\n')}</tbody>
+        </table>
+      `;
+      document.getElementById('details-root').innerHTML = table;
+    }
+    load().catch(err => { document.getElementById('details-root').textContent = 'Error loading data'; console.error(err); });
+  </script>
+</body>
+</html>
