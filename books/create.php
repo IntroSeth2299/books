@@ -17,15 +17,29 @@ if(isset($_POST['submit'])){
 }
 ?>
 
-<link rel="stylesheet" href="../style.css">
-<div class="container">
-<h2>Add Book</h2>
-<a href="../" class="button btn-back">Back</a>
-<form method="POST">
-<input type="text" name="title" placeholder="Title" required>
-<input type="number" name="page" placeholder="Pages">
-<input type="number" name="publish_year" placeholder="Publish Year">
-<input type="text" name="category" placeholder="Category">
-<input type="submit" name="submit" value="Save">
-</form>
-</div>
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Add Book</title>
+	<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+	<div class="container">
+		<h2>Add Book</h2>
+		<a href="list.php" class="btn-back">Back</a>
+		<form method="POST">
+			<label>Title</label>
+			<input type="text" name="title" placeholder="Title" required>
+			<label>Pages</label>
+			<input type="number" name="page" placeholder="Pages">
+			<label>Publish Year</label>
+			<input type="number" name="publish_year" placeholder="Publish Year">
+			<label>Category</label>
+			<input type="text" name="category" placeholder="Category">
+			<button class="btn-add" type="submit" name="submit">Save</button>
+		</form>
+	</div>
+</body>
+</html>

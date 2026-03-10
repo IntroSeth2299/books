@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Edit Book - Demo</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Edit Book</h2>
+        <a href="index.html" class="btn-back">Back</a>
+        <form id="bookForm">
+            <label>Title</label>
+            <input type="text" id="title" required>
+            <label>Pages</label>
+            <input type="number" id="page">
+            <label>Publish Year</label>
+            <input type="number" id="publish_year">
+            <label>Category</label>
+            <input type="text" id="category">
+            <button class="btn-edit" type="submit">Update</button>
+        </form>
+    </div>
+
+    <script src="../js/data.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const bookId = urlParams.get('id');
+        
+        if (!bookId) {
+            window.location.href = 'index.html';
+        }
+        
+        const book = AppData.getBook(bookId);
+        if (!book) {
+            alert('Book not found!');
+            window.location.href = 'index.html';
+        }
+        
+        document.getElementById('title').value = book.title || '';
+        document.getElementById('page').value = book.page || '';
+        document.getElementById('publish_year').value = book.publish_year || '';
+        document.getElementById('category').value = book.category || '';
+        
+        document.getElementById('bookForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const updatedBook = {
+                title: document.getElementById('title').value,
+                page: parseInt(document.getElementById('page').value) || 0,
+                publish_year: parseInt(document.getElementById('publish_year').value) || 0,
+                category: document.getElementById('category').value
+            };
+            
+            AppData.updateBook(bookId, updatedBook);
+            alert('Book updated successfully!');
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

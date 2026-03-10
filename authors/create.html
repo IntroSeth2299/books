@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Add Author - Demo</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Add Author</h2>
+        <a href="index.html" class="btn-back">Back</a>
+        <form id="authorForm">
+            <label>Name</label>
+            <input type="text" id="name" placeholder="Name" required>
+            <label>Email</label>
+            <input type="email" id="email" placeholder="Email">
+            <label>Address</label>
+            <input type="text" id="address" placeholder="Address">
+            <button class="btn-add" type="submit">Save</button>
+        </form>
+    </div>
+
+    <script src="../js/data.js"></script>
+    <script>
+        document.getElementById('authorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const author = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                address: document.getElementById('address').value
+            };
+            
+            AppData.addAuthor(author);
+            alert('Author added successfully!');
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

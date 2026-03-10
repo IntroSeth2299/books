@@ -21,23 +21,29 @@ if (isset($_POST['update'])) {
 }
 ?>
 
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Edit Book</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-<div class="container">
-    <h2>Edit Book</h2>
-    <a href="../" class="button btn-back">Back</a>
-    <form method="POST">
-        <input type="text" name="title" value="<?= htmlspecialchars($row['title']); ?>" required>
-        <input type="number" name="page" value="<?= htmlspecialchars($row['page']); ?>">
-        <input type="number" name="publish_year" value="<?= htmlspecialchars($row['publish_year']); ?>">
-        <input type="text" name="category" value="<?= htmlspecialchars($row['category']); ?>">
-        <input type="submit" name="update" value="Update">
-    </form>
-</div>
+    <div class="container">
+        <h2>Edit Book</h2>
+        <a href="list.php" class="btn-back">Back</a>
+        <form method="POST">
+            <label>Title</label>
+            <input type="text" name="title" value="<?= htmlspecialchars($row['title']); ?>" required>
+            <label>Pages</label>
+            <input type="number" name="page" value="<?= htmlspecialchars($row['page']); ?>">
+            <label>Publish Year</label>
+            <input type="number" name="publish_year" value="<?= htmlspecialchars($row['publish_year']); ?>">
+            <label>Category</label>
+            <input type="text" name="category" value="<?= htmlspecialchars($row['category']); ?>">
+            <button class="btn-edit" type="submit" name="update">Update</button>
+        </form>
+    </div>
 </body>
 </html>

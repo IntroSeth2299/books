@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Assign Author to Book - Demo</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Assign Author to Book</h2>
+        <div class="actions">
+            <a href="../" class="btn-back">Back</a>
+            <button onclick="AppData.resetData()" class="btn-warn" style="background: #f59e0b;">Reset Demo Data</button>
+        </div>
+        
+        <form id="assignForm">
+            <label>Select Book</label>
+            <select id="book_id" required>
+                <option value="">Select Book</option>
+            </select>
+
+            <label>Select Author</label>
+            <select id="author_id" required>
+                <option value="">Select Author</option>
+            </select>
+
+            <button class="btn-assign" type="submit">Assign</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <h3>Current Assignments</h3>
+        <div id="assignments-container">
+            <!-- Assignments will be loaded here -->
+        </div>
+    </div>
+
+    <script src="../js/data.js"></script>
+    <script>
+        function loadDropdowns() {
+            const books = AppData.getBooks();
+            const authors = AppData.getAuthors();
+            
+            const bookSelect = document.getElementById('book_id');
+            const authorSelect = document.getElementById('author_id');
+            
+            bookSelect.innerHTML = '<option value="">Select Book</option>';
+            authorSelect.innerHTML = '<option value="">Select Author</option>';
+            
+            books.forEach(book => {
+                bookSelect.innerHTML += `<option value="${book.id}">${escapeHtml(book.title)}</option>`;
+            });
+            
+            authors.forEach(author => {
+                authorSelect.innerHTML += `<option value="${author.id}">${escapeHtml(author.name)}</option>`;
+            });
+        }
+        
+        function loadAssignments() {
+            const assignments = AppData.getAssignmentsWithDetails();
+            const container = document.getElementById('assignments-container');
+            
+            if (assignments.length === 0) {
+                container.innerHTML = '<p class="note">No assignments yet.</p>';
+                return;
+            }
+            
+            let html = '<table><thead><tr><th>Book</th><th>Author</th><th>Action</th></tr></thead><tbody>';
+            
+            assignments.forEach(a => {
+                html += `<tr>
+                    <td>${escapeHtml(a.book_title)}</td>
+                    <td>${escapeHtml(a.author_name)}</td>
+                    <td>
+                        <a href="#" onclick="removeAssignment(${a.book_id}, ${a.author_id})" class="btn-delete">Remove</a>
+                    </td>
+                </tr>`;
+            });
+            
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+        
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        function removeAssignment(book_id, author_id) {
+            if (confirm('Remove this assignment?')) {
+                AppData.removeAssignment(book_id, author_id);
+                loadAssignments();
+                loadDropdowns();
+            }
+        }
+        
+        document.getElementById('assignForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const book_id = document.getElementById('book_id').value;
+            const author_id = document.getElementById('author_id').value;
+            
+            if (AppData.addAssignment(book_id, author_id)) {
+                alert('Assignment created successfully!');
+                loadAssignments();
+                document.getElementById('assignForm').reset();
+            } else {
+                alert('This assignment already exists!');
+            }
+        });
+        
+        loadDropdowns();
+        loadAssignments();
+    </script>
+</body>
+</html>

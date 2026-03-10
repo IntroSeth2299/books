@@ -16,14 +16,27 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-<link rel="stylesheet" href="../style.css">
-<div class="container">
-<h2>Add Author</h2>
-<a href="../" class="button btn-back">Back</a>
-<form method="POST">
-    <input type="text" name="name" placeholder="Name" required>
-    <input type="email" name="email" placeholder="Email">
-    <input type="text" name="address" placeholder="Address">
-    <input type="submit" name="submit" value="Save">
-</form>
-</div>
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Add Author</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Add Author</h2>
+        <a href="list.php" class="btn-back">Back</a>
+        <form method="POST">
+            <label>Name</label>
+            <input type="text" name="name" placeholder="Name" required>
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Email">
+            <label>Address</label>
+            <input type="text" name="address" placeholder="Address">
+            <button class="btn-add" type="submit" name="submit">Save</button>
+        </form>
+    </div>
+</body>
+</html>

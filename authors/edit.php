@@ -20,14 +20,27 @@ if (isset($_POST['update'])) {
 }
 ?>
 
-<link rel="stylesheet" href="../style.css">
-<div class="container">
-<h2>Edit Author</h2>
-<a href="../" class="button btn-back">Back</a>
-<form method="POST">
-    <input type="text" name="name" value="<?= htmlspecialchars($row['name']); ?>" required>
-    <input type="email" name="email" value="<?= htmlspecialchars($row['email']); ?>">
-    <input type="text" name="address" value="<?= htmlspecialchars($row['address']); ?>">
-    <input type="submit" name="update" value="Update">
-</form>
-</div>
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Edit Author</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Edit Author</h2>
+        <a href="list.php" class="btn-back">Back</a>
+        <form method="POST">
+            <label>Name</label>
+            <input type="text" name="name" value="<?= htmlspecialchars($row['name']); ?>" required>
+            <label>Email</label>
+            <input type="email" name="email" value="<?= htmlspecialchars($row['email']); ?>">
+            <label>Address</label>
+            <input type="text" name="address" value="<?= htmlspecialchars($row['address']); ?>">
+            <button class="btn-edit" type="submit" name="update">Update</button>
+        </form>
+    </div>
+</body>
+</html>
