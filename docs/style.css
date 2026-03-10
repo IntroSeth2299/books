@@ -1,9 +1,0 @@
-/* copied and simplified from project style.css for the static docs site */
-body { font-family: Arial, Helvetica, sans-serif; background:#f6f6f6; margin:0; padding:0 }
-.container { max-width:1000px; margin:48px auto; background:#fff; padding:24px; box-shadow:0 8px 24px rgba(0,0,0,.06); }
-h2 { margin-top:0 }
-.actions { margin-bottom:16px }
-.button, .btn-add, .btn-edit, .btn-delete { display:inline-block; padding:8px 12px; text-decoration:none; background:#007bff; color:#fff; border-radius:4px }
-table { width:100%; border-collapse:collapse; }
-th, td { text-align:left; padding:8px; border-bottom:1px solid #eee }
-.btn-back { background:#6c757d }

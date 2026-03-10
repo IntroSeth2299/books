@@ -1,9 +1,9 @@
 <?php
 // Read DB credentials from environment when available (Docker, VPS, shared hosting)
 // Support multiple env names for portability and provide safe defaults for local Docker Compose
-$host = getenv('DB_HOST') ?: getenv('MYSQL_HOST') ?: 'db';
+$host = getenv('DB_HOST') ?: getenv('MYSQL_HOST') ?: 'localhost';
 $user = getenv('DB_USER') ?: getenv('MYSQL_USER') ?: 'root';
-$password = getenv('DB_PASSWORD') ?: getenv('MYSQL_PASSWORD') ?: 'example';
+$password = getenv('DB_PASSWORD') ?: getenv('MYSQL_PASSWORD') ?: '';
 $database = getenv('DB_NAME') ?: getenv('MYSQL_DATABASE') ?: 'BookAuthorDB';
 
 // Optional base URL for generating absolute links (not required if using relative links)
