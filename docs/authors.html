@@ -3,42 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Authors — Static</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Authors</title>
+  <link rel="stylesheet" href="../style.css">
 </head>
 <body>
   <div class="container">
     <a class="btn-back" href="index.html">← Back</a>
+    <a class="btn-add" href="#" style="float:right; margin-top:-36px;">Add Author</a>
     <h2>Authors</h2>
 
-    <p class="note">Static view of authors. Provide a <code>data.json</code> for dynamic content on the client-side.</p>
-
-    <table id="authors-table">
-      <thead><tr><th>ID</th><th>Name</th></tr></thead>
+    <table>
+      <thead><tr><th>ID</th><th>Name</th><th>ACTION</th></tr></thead>
       <tbody>
-        <tr><td>1</td><td>Jane Doe</td></tr>
-        <tr><td>2</td><td>John Smith</td></tr>
+        <tr><td>1</td><td>Jane Doe</td><td><a class="btn-edit" href="#">Edit</a> <a class="btn-delete" href="#">Delete</a></td></tr>
+        <tr><td>2</td><td>John Smith</td><td><a class="btn-edit" href="#">Edit</a> <a class="btn-delete" href="#">Delete</a></td></tr>
       </tbody>
     </table>
   </div>
-
-  <script>
-    (async function(){
-      try {
-        const r = await fetch('data.json');
-        if (!r.ok) return;
-        const data = await r.json();
-        if (!data.authors) return;
-        const tbody = document.querySelector('#authors-table tbody');
-        tbody.innerHTML = '';
-        data.authors.forEach(a=>{
-          const tr = document.createElement('tr');
-          tr.innerHTML = `<td>${a.id}</td><td>${escapeHtml(a.name)}</td>`;
-          tbody.appendChild(tr);
-        });
-      } catch(e) {}
-      function escapeHtml(s){ return String(s).replace(/[&"'<>]/g, c=>({ '&':'&amp;','"':'&quot;','\'':'&#39;','<':'&lt;','>':'&gt;' }[c])); }
-    })();
-  </script>
 </body>
 </html>
