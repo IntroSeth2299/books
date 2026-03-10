@@ -72,3 +72,39 @@ Optional: If you want me to make the app deployable to an online PHP host, I can
 
 If you want me to edit anything in the repo now (add a `Dockerfile`, add a base URL constant in `config.php`, or auto-update other files), tell me which and I'll apply the change.
 # books
+
+## Docker / VPS quickstart
+
+The project now includes a `Dockerfile` and `docker-compose.yml` so you can run the full app (PHP + MySQL) locally or on a VPS that supports Docker Compose.
+
+Run locally:
+
+```bash
+# Build and start containers (first run may take a few minutes)
+docker compose up --build
+
+# Visit the app at http://localhost:8080/
+```
+
+Defaults used by docker-compose:
+
+- MySQL root password: `example`
+- Database name: `BookAuthorDB`
+- PHP app available at port `8080` on the host
+
+To stop and remove containers:
+
+```bash
+docker compose down
+```
+
+Notes for deployment to a public server:
+
+- If you deploy to a hosting provider (Render, Fly, DigitalOcean), prefer creating a managed database (MySQL) and set the `DB_*` environment variables on the host instead of embedding passwords into files.
+- For a VPS (DigitalOcean), copy the project to the server, install Docker + Docker Compose, and run `docker compose up -d --build`. Make sure the server firewall allows port 80/8080 as needed.
+- For Render (or other PaaS) you can deploy the Dockerfile directly and configure environment variables and a managed database via their dashboard.
+
+If you want, I can also:
+
+- Add a small SQL migration file to create the `BookAuthorDB` schema and some seed data, or
+- Add a `Makefile` or a tiny setup script that waits for MySQL and runs the migrations automatically.

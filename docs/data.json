@@ -1,0 +1,38 @@
+{
+  "books": [
+    {
+      "book_id": 1,
+      "title": "Pride and Prejudice",
+      "publish_year": 1813,
+      "category": "Fiction",
+      "is_delete": 0
+    },
+    {
+      "book_id": 2,
+      "title": "Adventures of Huckleberry Finn",
+      "publish_year": 1884,
+      "category": "Fiction",
+      "is_delete": 0
+    }
+  ],
+  "authors": [
+    {
+      "author_id": 1,
+      "name": "Jane Austen",
+      "email": "jane@example.com",
+      "address": "Steventon, Hampshire",
+      "is_delete": 0
+    },
+    {
+      "author_id": 2,
+      "name": "Mark Twain",
+      "email": "mark@example.com",
+      "address": "Florida, Missouri",
+      "is_delete": 0
+    }
+  ],
+  "book_details": [
+    { "id": 1, "book_id": 1, "author_id": 1, "is_deleted": 0 },
+    { "id": 2, "book_id": 2, "author_id": 2, "is_deleted": 0 }
+  ]
+}

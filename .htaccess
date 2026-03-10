@@ -1,8 +1,0 @@
-# Prefer index.php over index.html when both are present
-DirectoryIndex index.php index.html
-
-# If you have mod_rewrite rules later, make sure RewriteEngine is enabled
-# RewriteEngine On
-
-# Prevent directory listings
-Options -Indexes

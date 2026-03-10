@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Authors — Demo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Authors</h2>
+    <a class="button btn-back" href="index.html">Back</a>
+    <div id="authors-root"></div>
+  </div>
+
+  <script>
+    async function load() {
+      const res = await fetch('data.json');
+      const data = await res.json();
+
+      const rows = data.authors.map(a => {
+        return `<tr><td>${a.author_id}</td><td>${a.name}</td><td>${a.email || ''}</td><td>${a.address || ''}</td></tr>`;
+      });
+
+      const table = `
+        <table>
+          <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Address</th></tr></thead>
+          <tbody>${rows.join('\n')}</tbody>
+        </table>
+      `;
+      document.getElementById('authors-root').innerHTML = table;
+    }
+    load().catch(err => { document.getElementById('authors-root').textContent = 'Error loading data'; console.error(err); });
+  </script>
+</body>
+</html>
