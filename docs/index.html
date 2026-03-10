@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Books CRUD — Docs (Static)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Books CRUD — Demo (Static)</h2>
+    <div class="actions">
+      <a class="button" href="books.html">Books</a>
+      <a class="button" href="authors.html">Authors</a>
+      <a class="button" href="book_details.html">Book Assignments</a>
+    </div>
+    <p class="note">This is a static GitHub Pages-friendly demo. Interactions are read-only unless you add a matching <code>data.json</code> in this folder (optional).</p>
+    <p class="note">To enable dynamic editing on your local XAMPP server keep the PHP management pages in <code>docs/*.php</code> or in the root app.</p>
+  </div>
+
+  <script>
+    // Try to load data.json if present and show a console hint
+    fetch('data.json').then(r=>{
+      if (!r.ok) return; console.info('data.json found — client-side rendering available');
+    }).catch(()=>{});
+  </script>
+</body>
+</html>

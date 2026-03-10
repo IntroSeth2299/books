@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Books — Static</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <a class="btn-back" href="index.html">← Back</a>
+    <h2>Books</h2>
+
+    <p class="note">Static view. To power this page from your live DB, export a <code>data.json</code> into this folder (optional).</p>
+
+    <table id="books-table">
+      <thead><tr><th>ID</th><th>Title</th><th>Description</th></tr></thead>
+      <tbody>
+        <!-- Sample placeholder rows -->
+        <tr><td>1</td><td>Example Book</td><td>A short description of the example book.</td></tr>
+        <tr><td>2</td><td>Another Title</td><td>Another short description.</td></tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <script>
+    // If a data.json exists with {books: [...]}, populate the table.
+    (async function(){
+      try {
+        const r = await fetch('data.json');
+        if (!r.ok) return;
+        const data = await r.json();
+        if (!data.books) return;
+        const tbody = document.querySelector('#books-table tbody');
+        tbody.innerHTML = '';
+        data.books.forEach(b=>{
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${b.id}</td><td>${escapeHtml(b.title)}</td><td>${escapeHtml(b.description||'')}</td>`;
+          tbody.appendChild(tr);
+        });
+      } catch(e) { /* ignore */ }
+      function escapeHtml(s){ return String(s).replace(/[&"'<>]/g, c=>({ '&':'&amp;','"':'&quot;','\'':'&#39;','<':'&lt;','>':'&gt;' }[c])); }
+    })();
+  </script>
+</body>
+</html>
